@@ -1,0 +1,10 @@
+Package: jp.r-plus.geoevent
+Name: GeoEvent for Activator
+Depends: mobilesubstrate, firmware (>= 7.0), cc.tweak.libobjcipc, libactivator (>= 1.9)
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: Geofencing event for activator.
+Maintainer: r_plus
+Author: r_plus
+Section: Tweaks
+Icon: file:///Applications/GeoEvent.app/Icon@2x.png

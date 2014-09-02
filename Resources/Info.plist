@@ -1,0 +1,37 @@
+{
+    CFBundleExecutable = "GeoEvent";
+    CFBundleIconFile = Icon.png;
+    CFBundleIconFiles = (
+            "Icon.png",
+            "Icon-72.png",
+            "Icon-72@2x.png",
+            "Icon@2x.png",
+            "Icon-Small.png",
+            "Icon-Small@2x.png"
+    );
+    CFBundleIdentifier = "jp.r-plus.geoevent";
+    CFBundleInfoDictionaryVersion = 6.0;
+    CFBundlePackageType = APPL;
+    CFBundleSignature = "????";
+	CFBundleDisplayName = "GeoEvent";
+    CFBundleDevelopmentRegion = "en";
+    CFBundleName = "GeoEvent";
+    CFBundleShortVersionString = 1.0;
+    UIDeviceFamily = (1);
+    CFBundleSupportedPlatforms = (
+	iPhoneOS
+    );
+    CFBundleVersion = 1.0;
+    DTPlatformName = iphoneos;
+    DTSDKName = iphoneos7.0;
+    DTPlatformVersion = 7.0;
+    LSRequiresIPhoneOS = 1;
+    MinimumOSVersion = 7.0;
+    UIStatusBarStyle = UIStatusBarStyleDefault;
+    UIBackgroundModes = (
+            "location"
+    );
+	UISupportedInterfaceOrientations = (
+            "UIInterfaceOrientationPortrait"
+    );
+}
