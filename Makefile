@@ -12,7 +12,7 @@ GeoEvent_FILES = files/AddNewEventViewController.m \
 				 files/ViewController.m \
 				 files/main.m
 GeoEvent_CFLAGS = -fobjc-arc
-GeoEvent_LIBRARIES = objcipc
+GeoEvent_LIBRARIES = objcipc activator
 
 include $(THEOS_MAKE_PATH)/application.mk
 

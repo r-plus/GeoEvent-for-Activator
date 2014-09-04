@@ -65,16 +65,6 @@ static NSString * const kEventPrefix = @"geoEvent4Activator";
     [self addGeoEvents];
 }
 
-// notification for debug.
-- (void)showBannerWithEventName:(NSString *)eventName
-{
-    BBBulletinRequest *bulletin = [[%c(BBBulletinRequest) alloc] init];
-    bulletin.title = eventName;
-    bulletin.message = @"Activated geo event!";
-    bulletin.sectionID = @"jp.r-plus.geoevent";
-    [(SBBulletinBannerController *)[%c(SBBulletinBannerController) sharedInstance] observer:nil addBulletin:bulletin forFeed:2];
-}
-
 + (void)load
 {
     @autoreleasepool {
@@ -85,14 +75,6 @@ static NSString * const kEventPrefix = @"geoEvent4Activator";
         [OBJCIPC registerIncomingMessageFromAppHandlerForMessageName:kGEUpdateEvents handler:^NSDictionary *(NSDictionary *dict) {
             NSLog(@"catching kGEUpdateEvents");
             [weakSelf updateEvents];
-            return nil;
-        }];
-        [OBJCIPC registerIncomingMessageFromAppHandlerForMessageName:kGEActivateEvent handler:^NSDictionary *(NSDictionary *dict) {
-            NSString *identifier = dict[@"Identifier"];
-            NSString *eventName = [kEventPrefix stringByAppendingString:identifier];
-            NSLog(@"catching kGEActivateEvent. event id = %@", eventName);
-            [LASharedActivator sendEventToListener:[LAEvent eventWithName:eventName mode:LASharedActivator.currentEventMode]];
-            [weakSelf showBannerWithEventName:[weakSelf localizedTitleForEventName:eventName]];
             return nil;
         }];
     }

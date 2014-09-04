@@ -13,12 +13,14 @@
 
 #if !DEBUG
 #import <objcipc/objcipc.h>
+#import <libactivator/libactivator.h>
 #endif
 
 @interface ViewController ()
 
 @end
 
+static NSString * const kEventPrefix = @"geoEvent4Activator";
 NSString * const kGEUpdateEvents = @"geoEventSubstrate_UpdateEvents";
 NSString * const kGEActivateEvent = @"geoEventSubstrate_ActivateEvent";
 
@@ -225,17 +227,21 @@ NSString * const kGEActivateEvent = @"geoEventSubstrate_ActivateEvent";
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
     NSLog(@"Enter %@", region);
-#if !DEBUG
-    [OBJCIPC sendMessageToSpringBoardWithMessageName:kGEActivateEvent dictionary:@{@"Identifier":region.identifier} replyHandler:nil];
-#endif
+    NSString *eventName = [kEventPrefix stringByAppendingString:region.identifier];
+    [LASharedActivator sendEventToListener:[LAEvent eventWithName:eventName mode:LASharedActivator.currentEventMode]];
+/*#if !DEBUG*/
+/*    [OBJCIPC sendMessageToSpringBoardWithMessageName:kGEActivateEvent dictionary:@{@"Identifier":region.identifier} replyHandler:nil];*/
+/*#endif*/
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
     NSLog(@"Exit %@", region);
-#if !DEBUG
-    [OBJCIPC sendMessageToSpringBoardWithMessageName:kGEActivateEvent dictionary:@{@"Identifier":region.identifier} replyHandler:nil];
-#endif
+    NSString *eventName = [kEventPrefix stringByAppendingString:region.identifier];
+    [LASharedActivator sendEventToListener:[LAEvent eventWithName:eventName mode:LASharedActivator.currentEventMode]];
+/*#if !DEBUG*/
+/*    [OBJCIPC sendMessageToSpringBoardWithMessageName:kGEActivateEvent dictionary:@{@"Identifier":region.identifier} replyHandler:nil];*/
+/*#endif*/
 }
 
 @end
