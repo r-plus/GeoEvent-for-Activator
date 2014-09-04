@@ -77,7 +77,7 @@
                 case 2: {
                     BOOL isExitedTrigger = [(NSNumber *)self.rootVC.geoFencingItems[self.selectedRow][@"ExitedTrigger"] boolValue];
                     cell.textLabel.text = @"Trigger";
-                    UISegmentedControl *seg = [[UISegmentedControl alloc] initWithItems:@[@"Entered", @"Exited"]];
+                    UISegmentedControl *seg = [[UISegmentedControl alloc] initWithItems:@[@"When I arrive...", @"When I leave..."]];
                     seg.selectedSegmentIndex = isExitedTrigger ? 1 : 0;
                     [seg addTarget:self
                                 action:@selector(segmentValueChanged:)
