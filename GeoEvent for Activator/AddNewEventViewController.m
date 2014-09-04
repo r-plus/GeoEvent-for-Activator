@@ -57,7 +57,7 @@
     self.name = self.textField.text;
     LocationSettingViewController *vc = [LocationSettingViewController new];
     vc.isModifyMode = NO;
-    vc.radius = 50.0;
+    vc.radius = 100.0;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

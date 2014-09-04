@@ -54,8 +54,8 @@
     UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(20.0, self.view.frame.size.height-70.0, 240.0, 44.0)];
     [slider addTarget:self action:@selector(radiusChanged:) forControlEvents:UIControlEventValueChanged];
     slider.value = self.radius;
-    slider.minimumValue = 50.0;
-    slider.maximumValue = 500.0; // 500m
+    slider.minimumValue = 100.0;
+    slider.maximumValue = 1000.0; // 1km
     self.slider = slider;
     [self.mapView addSubview:self.slider];
     
