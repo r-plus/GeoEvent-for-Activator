@@ -50,7 +50,7 @@ static NSString * const kEventPrefix = @"geoEvent4Activator";
 
 - (NSString *)localizedDescriptionForEventName:(NSString *)eventName
 {
-    return [@"GeoFencing event - " stringByAppendingString:[self triggerFromEventName:eventName]];;
+    return [@"GeoFencing event - " stringByAppendingString:[self triggerFromEventName:eventName]];
 }
 
 - (void)addGeoEvents
