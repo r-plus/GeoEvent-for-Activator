@@ -26,7 +26,7 @@ static NSString * const kEventPrefix = @"geoEvent4Activator";
     for (NSDictionary *item in self.geoItems) {
         if ([[kEventPrefix stringByAppendingString:item[@"Identifier"]] isEqualToString:eventName]) {
             BOOL isExitedTrigger = [item[@"ExitedTrigger"] boolValue];
-            return isExitedTrigger ? @"Leave" : @"Arrive";
+            return isExitedTrigger ? @"Leaving" : @"Arriving";
         }
     }
     return @"unknown";
