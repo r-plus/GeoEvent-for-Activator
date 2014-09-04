@@ -21,6 +21,17 @@ static NSString * const kPreferencePath = @"/var/mobile/Library/Preferences/jp.r
 static NSString * const kEventPrefix = @"geoEvent4Activator";
 
 @implementation GeoEventSubstrate
+- (NSString *)triggerFromEventName:(NSString *)eventName
+{
+    for (NSDictionary *item in self.geoItems) {
+        if ([[kEventPrefix stringByAppendingString:item[@"Identifier"]] isEqualToString:eventName]) {
+            BOOL isExitedTrigger = [item[@"ExitedTrigger"] boolValue];
+            return isExitedTrigger ? @"Leave" : @"Arrive";
+        }
+    }
+    return @"unknown";
+}
+
 // LAEventDataSource protocol requires
 - (NSString *)localizedTitleForEventName:(NSString *)eventName
 {
@@ -39,7 +50,7 @@ static NSString * const kEventPrefix = @"geoEvent4Activator";
 
 - (NSString *)localizedDescriptionForEventName:(NSString *)eventName
 {
-    return @"GeoFencing event";
+    return [@"GeoFencing event - " stringByAppendingString:[self triggerFromEventName:eventName]];;
 }
 
 - (void)addGeoEvents
