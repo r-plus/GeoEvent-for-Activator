@@ -227,21 +227,21 @@ NSString * const kGEActivateEvent = @"geoEventSubstrate_ActivateEvent";
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
     NSLog(@"Enter %@", region);
+#if !DEBUG
     NSString *eventName = [kEventPrefix stringByAppendingString:region.identifier];
     [LASharedActivator sendEventToListener:[LAEvent eventWithName:eventName mode:LASharedActivator.currentEventMode]];
-/*#if !DEBUG*/
 /*    [OBJCIPC sendMessageToSpringBoardWithMessageName:kGEActivateEvent dictionary:@{@"Identifier":region.identifier} replyHandler:nil];*/
-/*#endif*/
+#endif
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
     NSLog(@"Exit %@", region);
+#if !DEBUG
     NSString *eventName = [kEventPrefix stringByAppendingString:region.identifier];
     [LASharedActivator sendEventToListener:[LAEvent eventWithName:eventName mode:LASharedActivator.currentEventMode]];
-/*#if !DEBUG*/
 /*    [OBJCIPC sendMessageToSpringBoardWithMessageName:kGEActivateEvent dictionary:@{@"Identifier":region.identifier} replyHandler:nil];*/
-/*#endif*/
+#endif
 }
 
 @end
