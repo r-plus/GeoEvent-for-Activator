@@ -26,10 +26,11 @@ NSString * const kGEActivateEvent = @"geoEventSubstrate_ActivateEvent";
 
 @implementation ViewController
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    for (UITableViewCell *cell in [self.tableView visibleCells]) {
-        cell.selected = NO;
+    NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+    if (indexPath) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:animated];
     }
 }
 
