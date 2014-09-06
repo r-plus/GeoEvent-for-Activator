@@ -244,4 +244,9 @@ NSString * const kGEActivateEvent = @"geoEventSubstrate_ActivateEvent";
 #endif
 }
 
+- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error
+{
+    NSLog(@"region.identifier=%@ error=%@",region.identifier,error);
+}
+
 @end
