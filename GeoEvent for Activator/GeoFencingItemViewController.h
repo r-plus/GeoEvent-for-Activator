@@ -14,8 +14,7 @@
 @interface GeoFencingItemViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, MKMapViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (assign, nonatomic) NSUInteger selectedRow;
-@property (strong, nonatomic) NSString *name;
-@property (assign, nonatomic) BOOL isEnabled;
+@property (assign, nonatomic) BOOL isTimeFilterEnabled;
 @property (weak, nonatomic) ViewController *rootVC;
 
 @end

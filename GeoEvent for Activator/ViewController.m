@@ -58,7 +58,10 @@ NSString * const kGEActivateEvent = @"geoEventSubstrate_ActivateEvent";
         for (NSDictionary *dict in array) {
             NSString *name = dict[@"Name"];
             NSString *identifier = dict[@"Identifier"];
+            NSString *startFilterTime = dict[@"StartFilterTime"];
+            NSString *endFilterTime = dict[@"EndFilterTime"];
             NSNumber *enabled = dict[@"Enabled"];
+            NSNumber *timerFilterEnabled = dict[@"TimeFilterEnabled"];
             NSNumber *trigger = dict[@"ExitedTrigger"];
             CLLocationDegrees latitude = [dict[@"Latitude"] doubleValue];
             CLLocationDegrees longitude = [dict[@"Longitude"] doubleValue];
@@ -68,7 +71,15 @@ NSString * const kGEActivateEvent = @"geoEventSubstrate_ActivateEvent";
             region.notifyOnExit = [trigger boolValue];
             region.notifyOnEntry = ![trigger boolValue];
             
-            [self.geoFencingItems addObject:[@{@"Name":name, @"Location":region, @"Enabled":enabled, @"ExitedTrigger":trigger} mutableCopy]];
+            [self.geoFencingItems addObject:[@{
+                                               @"Name":name,
+                                               @"Location":region,
+                                               @"Enabled":enabled,
+                                               @"ExitedTrigger":trigger,
+                                               @"TimeFilterEnabled":timerFilterEnabled,
+                                               @"StartFilterTime":startFilterTime,
+                                               @"EndFilterTime":endFilterTime
+                                               } mutableCopy]];
         }
     }
     if (!self.locationManager) {
@@ -132,7 +143,15 @@ NSString * const kGEActivateEvent = @"geoEventSubstrate_ActivateEvent";
     NSLog(@"Adding new region...");
     region.notifyOnEntry = NO;
     region.notifyOnExit = YES;
-    [self.geoFencingItems insertObject:[@{@"Name":name, @"Location":region, @"Enabled":@YES, @"ExitedTrigger":@YES} mutableCopy] atIndex:0];
+    [self.geoFencingItems insertObject:[@{
+                                          @"Name":name,
+                                          @"Location":region,
+                                          @"Enabled":@YES,
+                                          @"ExitedTrigger":@YES,
+                                          @"TimeFilterEnabled":@NO,
+                                          @"StartFilterTime":@"00:00",
+                                          @"EndFilterTime":@"00:00"
+                                          } mutableCopy] atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     if (self.isGeoFencingMonitoring)

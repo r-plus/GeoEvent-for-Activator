@@ -19,7 +19,7 @@
 {
     [super viewWillAppear:animated];
     
-    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 40, 320, 44)];
+    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 40, self.view.frame.size.width, 44)];
     self.textField.delegate = self;
     self.textField.backgroundColor = [UIColor whiteColor];
     self.textField.placeholder = @"Event Name";

@@ -45,13 +45,17 @@
     self.locationManager.delegate = self;
     //self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
     self.locationManager.distanceFilter = 10;
+    // for iOS 8+
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)])
+        [self.locationManager requestAlwaysAuthorization];
+    
     if (self.isModifyMode)
         [self updatePinPositionAndRadius:self.coordinate automaticScale:YES];
     else
         [self.locationManager startUpdatingLocation];
     
     // add radius ajust slider.
-    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(20.0, self.view.frame.size.height-70.0, 240.0, 44.0)];
+    UISlider *slider = [[UISlider alloc] initWithFrame:CGRectMake(20.0, self.view.frame.size.height-70.0, self.view.frame.size.width-80.0, 44.0)];
     [slider addTarget:self action:@selector(radiusChanged:) forControlEvents:UIControlEventValueChanged];
     slider.value = self.radius;
     slider.minimumValue = 100.0;
@@ -187,7 +191,10 @@
         dict[@"Radius"] = [NSNumber numberWithDouble:self.radius];
         dict[@"ExitedTrigger"] = @YES;
         dict[@"Enabled"] = @YES;
+        dict[@"TimeFilterEnabled"] = @NO;
         dict[@"Identifier"] = identifier;
+        dict[@"StartFilterTime"] = @"00:00";
+        dict[@"EndFilterTime"] = @"00:00";
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSMutableArray *array = [[defaults arrayForKey:@"GeoItems"] mutableCopy];

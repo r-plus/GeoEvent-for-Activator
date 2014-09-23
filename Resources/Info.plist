@@ -27,6 +27,16 @@
     DTPlatformVersion = 7.0;
     LSRequiresIPhoneOS = 1;
     MinimumOSVersion = 7.0;
+    UIRequiredDeviceCapabilities = (
+        armv7
+    );
+    UIStatusBarTintParameters = {
+        UINavigationBar = {
+            Style = UIBarStyleDefault
+            Translucent = false
+        }
+    };
+    NSLocationAlwaysUsageDescription = "This will be used to obtain or track your location for Activator event.";
     UIStatusBarStyle = UIStatusBarStyleDefault;
     UIBackgroundModes = (
             "location"
