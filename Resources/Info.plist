@@ -32,9 +32,9 @@
     );
     UIStatusBarTintParameters = {
         UINavigationBar = {
-            Style = UIBarStyleDefault
-            Translucent = false
-        }
+            Style = UIBarStyleDefault;
+            Translucent = false;
+        };
     };
     NSLocationAlwaysUsageDescription = "This will be used to obtain or track your location for Activator event.";
     UIStatusBarStyle = UIStatusBarStyleDefault;
