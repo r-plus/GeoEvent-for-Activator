@@ -244,13 +244,68 @@ NSString * const kGEActivateEvent = @"geoEventSubstrate_ActivateEvent";
 
 #pragma mark -locationManager delegate
 
+- (BOOL)timeFilterForRegion:(CLRegion *)activatedRegion
+{
+    NSString *startFilterTimeString;
+    NSString *endFilterTimeString;
+    for (NSDictionary *item in self.geoFencingItems) {
+        CLRegion *region = item[@"Location"];
+        if ([activatedRegion.identifier isEqualToString:region.identifier]) {
+            if (![item[@"TimeFilterEnabled"] boolValue])
+                return YES;
+            startFilterTimeString = item[@"StartFilterTime"];
+            endFilterTimeString = item[@"EndFilterTime"];
+            break;
+        }
+    }
+    
+    // same mean always available.
+    if ([startFilterTimeString isEqualToString:endFilterTimeString])
+        return YES;
+    
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *com = [gregorian components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:[NSDate date]];
+    NSArray *startFilterHourMinute = [startFilterTimeString componentsSeparatedByString:@":"];
+    com.hour = [startFilterHourMinute[0] integerValue];
+    com.minute = [startFilterHourMinute[1] integerValue];
+    NSDate *startDate = [gregorian dateFromComponents:com];
+    NSLog(@"startDate = %@", startDate);
+    
+    NSArray *endFilterHourMinute = [endFilterTimeString componentsSeparatedByString:@":"];
+    com.hour = [endFilterHourMinute[0] integerValue];
+    com.minute = [endFilterHourMinute[1] integerValue];
+    NSDate *endDate = [gregorian dateFromComponents:com];
+    NSLog(@"endDate = %@", endDate);
+    
+    NSDate *now = [NSDate date];
+    NSLog(@"now = %@", now);
+    
+    switch ([startDate compare:endDate]) {
+        case NSOrderedAscending:
+            // return YES if now date is in range.
+            NSLog(@"asc");
+            return ([now timeIntervalSinceDate:startDate] > 0 && [now timeIntervalSinceDate:endDate] < 0);
+            break;
+        case NSOrderedDescending:
+            // return YES if now date is not in range.
+            NSLog(@"desc");
+            return !([now timeIntervalSinceDate:startDate] < 0 && [now timeIntervalSinceDate:endDate] > 0);
+            break;
+        case NSOrderedSame:
+            // it's mean 24h.
+            return YES;
+    }
+}
+
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
     NSLog(@"Enter %@", region);
 #if !DEBUG
-    NSString *eventName = [kEventPrefix stringByAppendingString:region.identifier];
-    [LASharedActivator sendEventToListener:[LAEvent eventWithName:eventName mode:LASharedActivator.currentEventMode]];
-/*    [OBJCIPC sendMessageToSpringBoardWithMessageName:kGEActivateEvent dictionary:@{@"Identifier":region.identifier} replyHandler:nil];*/
+    if ([self timeFilterForRegion:region]) {
+        NSString *eventName = [kEventPrefix stringByAppendingString:region.identifier];
+        [LASharedActivator sendEventToListener:[LAEvent eventWithName:eventName mode:LASharedActivator.currentEventMode]];
+        //[OBJCIPC sendMessageToSpringBoardWithMessageName:kGEActivateEvent dictionary:@{@"Identifier":region.identifier} replyHandler:nil];
+    }
 #endif
 }
 
@@ -258,9 +313,11 @@ NSString * const kGEActivateEvent = @"geoEventSubstrate_ActivateEvent";
 {
     NSLog(@"Exit %@", region);
 #if !DEBUG
-    NSString *eventName = [kEventPrefix stringByAppendingString:region.identifier];
-    [LASharedActivator sendEventToListener:[LAEvent eventWithName:eventName mode:LASharedActivator.currentEventMode]];
-/*    [OBJCIPC sendMessageToSpringBoardWithMessageName:kGEActivateEvent dictionary:@{@"Identifier":region.identifier} replyHandler:nil];*/
+    if ([self timeFilterForRegion:region]) {
+        NSString *eventName = [kEventPrefix stringByAppendingString:region.identifier];
+        [LASharedActivator sendEventToListener:[LAEvent eventWithName:eventName mode:LASharedActivator.currentEventMode]];
+        //[OBJCIPC sendMessageToSpringBoardWithMessageName:kGEActivateEvent dictionary:@{@"Identifier":region.identifier} replyHandler:nil];
+    }
 #endif
 }
 
