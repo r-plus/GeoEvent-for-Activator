@@ -27,6 +27,7 @@
     DTPlatformVersion = 7.0;
     LSRequiresIPhoneOS = 1;
     MinimumOSVersion = 7.0;
+    UILaunchStoryboardName = "LaunchScreen";
     UIRequiredDeviceCapabilities = (
         armv7
     );

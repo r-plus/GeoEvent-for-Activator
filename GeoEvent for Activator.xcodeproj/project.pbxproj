@@ -26,7 +26,7 @@
 		0A4F661D19A094C20049365C /* GeoFencingItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F661C19A094C20049365C /* GeoFencingItemViewController.m */; };
 		0A4F662019A0F5700049365C /* AddNewEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F661F19A0F5700049365C /* AddNewEventViewController.m */; };
 		0A4F662319A1031B0049365C /* LocationSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4F662219A1031B0049365C /* LocationSettingViewController.m */; };
-		0ABC874019D179ED00CD33A5 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ABC873F19D179ED00CD33A5 /* Launch Screen.xib */; };
+		0ABC874019D179ED00CD33A5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ABC873F19D179ED00CD33A5 /* LaunchScreen.xib */; };
 		0ABC874419D1AC2E00CD33A5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0ABC874319D1AC2E00CD33A5 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
@@ -68,7 +68,7 @@
 		0A4F661F19A0F5700049365C /* AddNewEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewEventViewController.m; sourceTree = "<group>"; };
 		0A4F662119A1031B0049365C /* LocationSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSettingViewController.h; sourceTree = "<group>"; };
 		0A4F662219A1031B0049365C /* LocationSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSettingViewController.m; sourceTree = "<group>"; };
-		0ABC873F19D179ED00CD33A5 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		0ABC873F19D179ED00CD33A5 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		0ABC874319D1AC2E00CD33A5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -145,7 +145,7 @@
 				0A4F661B19A094C20049365C /* GeoFencingItemViewController.h */,
 				0A4F661C19A094C20049365C /* GeoFencingItemViewController.m */,
 				0A4F65B319A082FB0049365C /* Images.xcassets */,
-				0ABC873F19D179ED00CD33A5 /* Launch Screen.xib */,
+				0ABC873F19D179ED00CD33A5 /* LaunchScreen.xib */,
 				0A4F65A819A082FA0049365C /* Supporting Files */,
 			);
 			path = "GeoEvent for Activator";
@@ -264,7 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A4F65AC19A082FA0049365C /* InfoPlist.strings in Resources */,
-				0ABC874019D179ED00CD33A5 /* Launch Screen.xib in Resources */,
+				0ABC874019D179ED00CD33A5 /* LaunchScreen.xib in Resources */,
 				0A4F65B419A082FB0049365C /* Images.xcassets in Resources */,
 				0ABC874419D1AC2E00CD33A5 /* Default-568h@2x.png in Resources */,
 				0A263B0A19A9871000BB4354 /* LocationArrow@2x.png in Resources */,

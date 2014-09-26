@@ -352,7 +352,7 @@ static NSUInteger const kDatePickerTag = 99;
         case 0:
             return 3;
         case 1:
-            NSLog(@"count = %ld", self.timeFilterCellItems.count);
+            NSLog(@"count = %ld", (unsigned long)self.timeFilterCellItems.count);
             return self.timeFilterCellItems.count;
         case 2:
             return 1;
