@@ -58,10 +58,7 @@ NSString * const kGEActivateEvent = @"geoEventSubstrate_ActivateEvent";
         for (NSDictionary *dict in array) {
             NSString *name = dict[@"Name"];
             NSString *identifier = dict[@"Identifier"];
-            NSString *startFilterTime = dict[@"StartFilterTime"];
-            NSString *endFilterTime = dict[@"EndFilterTime"];
             NSNumber *enabled = dict[@"Enabled"];
-            NSNumber *timerFilterEnabled = dict[@"TimeFilterEnabled"];
             NSNumber *trigger = dict[@"ExitedTrigger"];
             CLLocationDegrees latitude = [dict[@"Latitude"] doubleValue];
             CLLocationDegrees longitude = [dict[@"Longitude"] doubleValue];
@@ -70,6 +67,13 @@ NSString * const kGEActivateEvent = @"geoEventSubstrate_ActivateEvent";
             CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:coordinate radius:radius identifier:identifier];
             region.notifyOnExit = [trigger boolValue];
             region.notifyOnEntry = ![trigger boolValue];
+            // new options. need nil check.
+            NSString *startFilterTime = dict[@"StartFilterTime"];
+            NSString *endFilterTime = dict[@"EndFilterTime"];
+            NSNumber *timerFilterEnabled = dict[@"TimeFilterEnabled"];
+            startFilterTime = startFilterTime ?: @"00:00";
+            endFilterTime = endFilterTime ?: @"00:00";
+            timerFilterEnabled = timerFilterEnabled ?: @NO;
             
             [self.geoFencingItems addObject:[@{
                                                @"Name":name,
